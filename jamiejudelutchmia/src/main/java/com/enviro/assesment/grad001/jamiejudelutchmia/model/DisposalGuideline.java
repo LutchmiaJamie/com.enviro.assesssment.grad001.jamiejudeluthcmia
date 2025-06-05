@@ -17,7 +17,7 @@ public class DisposalGuideline {
     @Column(nullable = false)
     private String wasteType;
 
-    @NotBlank(message = "Waste category name is required")
+    @NotBlank(message = "Disposal instructions required")
     private String disposalInstructions;
 
     public DisposalGuideline() {}
