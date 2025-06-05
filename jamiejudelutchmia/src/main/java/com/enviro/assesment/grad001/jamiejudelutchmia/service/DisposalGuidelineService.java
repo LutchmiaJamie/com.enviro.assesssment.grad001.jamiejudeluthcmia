@@ -1,5 +1,6 @@
 package com.enviro.assesment.grad001.jamiejudelutchmia.service;
 
+import com.enviro.assesment.grad001.jamiejudelutchmia.exception.ResourceNotFoundException;
 import com.enviro.assesment.grad001.jamiejudelutchmia.model.DisposalGuideline;
 import com.enviro.assesment.grad001.jamiejudelutchmia.repository.DisposalGuidelineRepository;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class DisposalGuidelineService {
             guideline.setDisposalInstructions(updatedGuideline.getDisposalInstructions());
             return disposalGuidelineRepository.save(guideline);
         } else {
-            throw new RuntimeException("Disposal guideline not found.");
+            throw new ResourceNotFoundException("Disposal guideline not found.");
         }
     }
 

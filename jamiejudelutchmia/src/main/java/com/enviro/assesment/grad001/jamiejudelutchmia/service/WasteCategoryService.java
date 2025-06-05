@@ -1,6 +1,7 @@
 package com.enviro.assesment.grad001.jamiejudelutchmia.service;
 
 
+import com.enviro.assesment.grad001.jamiejudelutchmia.exception.ResourceNotFoundException;
 import com.enviro.assesment.grad001.jamiejudelutchmia.model.WasteCategory;
 import com.enviro.assesment.grad001.jamiejudelutchmia.repository.WasteCategoryRepository;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class WasteCategoryService {
             category.setDescription(updatedWasteCategory.getDescription());
             return wasteCategoryRepository.save(category);
         } else {
-            throw new RuntimeException("Waste Category not found");
+            throw new ResourceNotFoundException("Waste Category not found");
         }
     }
 

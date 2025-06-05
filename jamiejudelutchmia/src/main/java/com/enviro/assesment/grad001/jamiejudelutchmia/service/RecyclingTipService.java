@@ -1,6 +1,7 @@
 package com.enviro.assesment.grad001.jamiejudelutchmia.service;
 
 
+import com.enviro.assesment.grad001.jamiejudelutchmia.exception.ResourceNotFoundException;
 import com.enviro.assesment.grad001.jamiejudelutchmia.model.RecyclingTip;
 import com.enviro.assesment.grad001.jamiejudelutchmia.repository.RecyclingTipRepository;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class RecyclingTipService {
             tip.setTip(updatedTip.getTip());
             return recyclingTipRepository.save(tip);
         } else {
-            throw new RuntimeException("Recycling tip not found.");
+            throw new ResourceNotFoundException("Recycling tip not found.");
         }
     }
 
