@@ -2,6 +2,7 @@ package com.enviro.assesment.grad001.jamiejudelutchmia.controller;
 
 import com.enviro.assesment.grad001.jamiejudelutchmia.model.DisposalGuideline;
 import com.enviro.assesment.grad001.jamiejudelutchmia.service.DisposalGuidelineService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,13 +32,13 @@ public class DisposalGuidelineController {
 
     // create new guideline
     @PostMapping
-    public DisposalGuideline createDisposalGuideline(@RequestBody DisposalGuideline guideline) {
+    public DisposalGuideline createDisposalGuideline(@Valid @RequestBody DisposalGuideline guideline) {
         return disposalGuidelineService.createDisposalGuideline(guideline);
     }
 
     // Update an existing guideline
     @PutMapping("/{id}")
-    public DisposalGuideline updateDisposalGuideline(@PathVariable Long id, @RequestBody DisposalGuideline updatedGuideline) {
+    public DisposalGuideline updateDisposalGuideline(@PathVariable Long id,@Valid @RequestBody DisposalGuideline updatedGuideline) {
         return disposalGuidelineService.updateDisposalGuideline(id, updatedGuideline);
     }
 

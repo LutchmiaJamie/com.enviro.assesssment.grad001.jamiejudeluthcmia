@@ -12,7 +12,7 @@ public class RecyclingTip {
     private Long id;
 
 
-    @NotBlank(message = "Recycle tip is required")
+    @NotBlank(message = "tip is required")
     @Column(nullable = false)
     private String tip;
 

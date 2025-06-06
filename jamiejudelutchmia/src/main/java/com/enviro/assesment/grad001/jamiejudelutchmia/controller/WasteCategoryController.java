@@ -2,6 +2,7 @@ package com.enviro.assesment.grad001.jamiejudelutchmia.controller;
 
 import com.enviro.assesment.grad001.jamiejudelutchmia.model.WasteCategory;
 import com.enviro.assesment.grad001.jamiejudelutchmia.service.WasteCategoryService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,13 +32,13 @@ public class WasteCategoryController {
 
     // Create a new waste category
     @PostMapping
-    public WasteCategory createWasteCategory(@RequestBody WasteCategory wasteCategory) {
+    public WasteCategory createWasteCategory(@Valid @RequestBody WasteCategory wasteCategory) {
         return wasteCategoryService.createWasteCategory(wasteCategory);
     }
 
     // Update an existing waste category
     @PutMapping("/{id}")
-    public WasteCategory updateWasteCategory(@PathVariable Long id, @RequestBody WasteCategory updatedCategory) {
+    public WasteCategory updateWasteCategory(@PathVariable Long id,@Valid @RequestBody WasteCategory updatedCategory) {
         return wasteCategoryService.updateWasteCategory(id, updatedCategory);
     }
 

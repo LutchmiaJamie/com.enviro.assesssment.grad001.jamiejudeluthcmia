@@ -12,7 +12,7 @@ public class WasteCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Waste category is required")
+    @NotBlank(message = "wasteType is required")
     @Size(min = 2, max = 50, message = "Waste category name must be between 2 and 50 characters")
     @Column(nullable = false)
     private String wasteType;

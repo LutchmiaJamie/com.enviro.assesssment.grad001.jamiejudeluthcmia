@@ -1,6 +1,5 @@
 package com.enviro.assesment.grad001.jamiejudelutchmia.service;
 
-
 import com.enviro.assesment.grad001.jamiejudelutchmia.exception.ResourceNotFoundException;
 import com.enviro.assesment.grad001.jamiejudelutchmia.model.RecyclingTip;
 import com.enviro.assesment.grad001.jamiejudelutchmia.repository.RecyclingTipRepository;
@@ -24,7 +23,13 @@ public class RecyclingTipService {
 
     // Retrieve a single recycling tip by ID
     public Optional<RecyclingTip> getRecyclingTipById(Long id) {
-        return recyclingTipRepository.findById(id);
+        Optional<RecyclingTip> existingTip = recyclingTipRepository.findById(id);
+        if (existingTip.isPresent()) {
+            return recyclingTipRepository.findById(id);
+        } else  {
+            throw new ResourceNotFoundException("RecyclingTip not found with id " + id);
+        }
+
     }
 
     // Create a new recycling tip
@@ -37,16 +42,20 @@ public class RecyclingTipService {
         Optional<RecyclingTip> existingTip = recyclingTipRepository.findById(id);
         if (existingTip.isPresent()) {
             RecyclingTip tip = existingTip.get();
-            // Update the tip details with new values
             tip.setTip(updatedTip.getTip());
             return recyclingTipRepository.save(tip);
         } else {
-            throw new ResourceNotFoundException("Recycling tip not found.");
+            throw new ResourceNotFoundException("Recycling tip not found with id." +id);
         }
     }
 
     // Delete a recycling tip by ID
     public void deleteRecyclingTip(Long id) {
-        recyclingTipRepository.deleteById(id);
+        Optional<RecyclingTip> existingTip = recyclingTipRepository.findById(id);
+        if (existingTip.isPresent()) {
+            recyclingTipRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("Recycling Tip not found with id " + id);
+        }
     }
 }

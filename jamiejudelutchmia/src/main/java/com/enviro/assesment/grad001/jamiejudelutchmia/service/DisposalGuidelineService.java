@@ -23,7 +23,13 @@ public class DisposalGuidelineService {
 
     // Get one guideline by ID
     public Optional<DisposalGuideline> getDisposalGuidelineById(Long id) {
-        return disposalGuidelineRepository.findById(id);
+        Optional<DisposalGuideline> existingGuideline = disposalGuidelineRepository.findById(id);
+        if (existingGuideline.isPresent()) {
+            return disposalGuidelineRepository.findById(id);
+        } else  {
+            throw new ResourceNotFoundException("DisposalGuideline not found with id " + id);
+        }
+
     }
 
     // Create new guideline
@@ -40,12 +46,17 @@ public class DisposalGuidelineService {
             guideline.setDisposalInstructions(updatedGuideline.getDisposalInstructions());
             return disposalGuidelineRepository.save(guideline);
         } else {
-            throw new ResourceNotFoundException("Disposal guideline not found.");
+            throw new ResourceNotFoundException("Disposal guideline not found with id " +id);
         }
     }
 
     // Delete a disposal guideline by ID
     public void deleteDisposalGuideline(Long id) {
-        disposalGuidelineRepository.deleteById(id);
+        Optional<DisposalGuideline> existingGuideline = disposalGuidelineRepository.findById(id);
+        if (existingGuideline.isPresent()) {
+            disposalGuidelineRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("DisposalGuideline not found with id " + id);
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.enviro.assesment.grad001.jamiejudelutchmia.service;
 
-
 import com.enviro.assesment.grad001.jamiejudelutchmia.exception.ResourceNotFoundException;
 import com.enviro.assesment.grad001.jamiejudelutchmia.model.WasteCategory;
 import com.enviro.assesment.grad001.jamiejudelutchmia.repository.WasteCategoryRepository;
@@ -26,7 +25,13 @@ public class WasteCategoryService {
 
     //Get one waste category by ID
     public Optional<WasteCategory> getWasteCategoryById(Long id) {
-        return wasteCategoryRepository.findById(id);
+        Optional<WasteCategory> existingTip = wasteCategoryRepository.findById(id);
+        if (existingTip.isPresent()) {
+            return wasteCategoryRepository.findById(id);
+        } else  {
+            throw new ResourceNotFoundException("Waste category not found with id " + id);
+        }
+
     }
 
     //creat new waste category
@@ -43,13 +48,18 @@ public class WasteCategoryService {
             category.setDescription(updatedWasteCategory.getDescription());
             return wasteCategoryRepository.save(category);
         } else {
-            throw new ResourceNotFoundException("Waste Category not found");
+            throw new ResourceNotFoundException("Waste Category not found with id." +id);
         }
     }
 
     //Delete category
     public void deleteWasteCategory(Long id) {
-        wasteCategoryRepository.deleteById(id);
+        Optional<WasteCategory> existingTip = wasteCategoryRepository.findById(id);
+        if (existingTip.isPresent()) {
+            wasteCategoryRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("Waste category not found with id " + id);
+        }
     }
 
 }
